@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <title>AE框架数据测试</title>
+      
+      <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/reset.css" />
+      <link rel="stylesheet" type="text/css" media="screen" href="./common/css/ae.css" />
+      <style>
+         .window{
+            width: 300px;
+            height: 160px;
+         }
+      </style>
+      
+   </head>
+   <body>
+      <div class="window">
+         <div class="carousel" id="carousel">
+            <div id="carousel_wrapper" style="height: inherit">
+               <div class="carousel-items">1</div>
+               <div class="carousel-items">2</div>
+               <div class="carousel-items">3</div>
+            </div>
+         </div>
+      </div>
+      
+   </body>
+</html>
+<script src="./common/js/ae.js"></script>
+<script>
+   // ae = new Ae();
+   // ae.carousel.init({
+   //    id: 'carousel',
+   //    isBtn: true,
+   //    total: 3
+   // });
+
+   var Ae = (function() {
+
+      // 静态私有属性
+      var num = 0;
+      // 静态私有方法
+      function checkNum() {};
+
+      function _ae() {
+         // 私有属性
+         var myName = "There is _ae ";
+
+         // 私有方法
+         function getNum() {
+            console.log("Number is " + num);
+         }
+
+         // 公有属性
+         this.name = "This is a AE frame!";
+
+         // 特权方法
+         this.getName = function () {
+            console.log("FramName is " + name);
+         }
+      }
+
+      _ae.prototype = {
+         showName: function () {
+            console.log("MyName is ae!" + myName);
+         }
+      }
+
+      return _ae;
+   })();
+
+
+
+</script>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>AE框架数据测试</title>
+    
+    <link rel="stylesheet" type="text/css" media="screen" href="ae2.css" />
+
+
+    <style>
+            .flex-box {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                align-items: center;
+                width: 240px;
+                height: 240px;
+                overflow: auto;
+                border: 1px solid #ddd;
+            }
+
+            .flex-box span {
+                width: 64px;
+                height: 64px;
+                text-align: center;
+                line-height: 64px;
+                border: 1px solid #333;
+                cursor: pointer;
+            }
+        </style>
+</head>
+<body style="background-color: #fff">
+    <div class="w-1200">
+        <button class="btn-default" id="btn1" type="button">点击我测试数据!</button>
+        <text id="context1">context1</text>
+    </div>
+    <br>
+    <div class="w-1200">
+        <input type="text" id="text1">
+        <text id="context2">context2</text>
+    </div>
+    <br>
+    <div class="w-1200">
+        <button class="btn-default" id="btn2" type="button">点击我测试数据2</button>
+        <text id="context3">context3</text>
+    </div>
+    <br>
+    <div class="w-1200">
+        <button class="btn-default" id="btn3" type="button">点击我测试数据3</button>
+        <text id="context4">context4</text>
+    </div>
+    <br>
+    <div class="w-1200">
+        <button class="btn-default" id="btn4" type="button">点击我测试数据4</button>
+        <text id="context5">context5</text>
+    </div>
+
+    <div class="w-1200">
+        <code>
+            <pre>sss</pre>
+            <kbd>quit</kbd><var>cc</var>
+            键入 <kbd>quit</kbd> 来退出程序，或者键入 <kbd>menu</kbd> 来返回主菜单。
+        </code>
+        
+    </div>
+
+    <div class="w-1200">
+        <form>
+            <select id="obj">
+                <option value="1">ssss</option>
+                <option  value="2">aas</option>
+                <option  value="3">bbs</option>
+            </select>
+        </form>
+        
+    </div>
+
+    <div class="w-1200">
+        <ul id="list">
+            <li>click me</li>
+            <li>click me</li>
+            <li>click me</li>
+            <li>click me</li>
+            <span>click me!</span>
+        </ul>
+        
+    </div>
+
+    <div class="w-1200">
+        <div class="flex-box">
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+            <span>5</span>
+            <span>6</span>
+        </div>
+    
+        
+ 
+
+        
+    </div>
+</body>
+</html>
+<script src="ae.js"></script>
+<script>
+    var obj = document.getElementById("obj");
+    
+    obj.addEventListener("change", function() {
+        console.log(obj.options[obj.selectedIndex].value);
+        console.log(obj.options[obj.selectIndex].text);
+    })
+</script>
+<script>
+    var listItems = document.getElementsByTagName('li');
+    var hander = function(data) {
+        return function() {
+            alert(data);
+        }
+    }
+
+    for(var i = 0; i < listItems.length; i++) {
+        listItems[i].onclick = hander(i);
+    }
+    
+</script>
+
+<script>
+    var spanItems = document.getElementsByTagName('span');
+    console.log(spanItems);
+    
+    function hanedle(data) {
+        return function() {
+            alert(data);
+        };
+    }
+
+    for(var i = 0; i < spanItems.length; i++) {
+        spanItems[i].onclick = hanedle(i);
+    }
+    
+</script>
+<script>
+    var context1 = ae.func.getId("context1");
+    var btn1 = ae.func.getId("btn1");
+
+    btn1.addEventListener('click', function() {
+        ae.trans.AJAX({
+            type: "GET",
+            url: "http://localhost/mook2.js",
+            async: false
+        }, callback);
+        
+        function callback(xmls) {
+            var mook = xmls.responseText;
+            context1.innerHTML = mook;
+        }
+    });
+    // ae.event.click("btn1", changeText());
+
+    var context2 = ae.func.getId("context2");
+    var text1 = ae.func.getId("text1");
+    var jsonName;
+
+    text1.addEventListener("blur", function() {
+        if(text1.value == 0) {
+            context2.innerHTML = "该内容不能为空";
+        }
+    });
+
+    text1.addEventListener("keyup", function() {
+        var url = "http://localhost/mook3.json";
+
+        ae.trans.AJAX({
+            type: "GET",
+            url: url,
+            async: true
+        }, callback);
+
+        function callback(xmls) {
+            jsonName = xmls.responseText;
+            jsonName = JSON.parse(jsonName);
+            context2.innerHTML = '';
+            for(var i = 0; i < jsonName.two.length; i++) {
+                if(text1.value.toLowerCase() == jsonName.two[i][0].toLowerCase()) {
+                    context2.innerHTML += jsonName.two[i] + ",";
+                }
+            }
+            if(context2.innerHTML == '') {
+                context2.innerHTML = "没有对应数据";
+            }
+            //context2.innerHTML = text1.value;
+
+            // else if(xmls.status == 304) {
+            //     console.log("数据未更新，不需要重新加载");
+            //     return;
+            // }
+            // else {
+            //     console.log("数据加载错误");
+            // }
+        }
+    })
+    
+    var context3 = ae.func.getId("context3");
+    var btn2 = ae.func.getId("btn2");
+    
+    function showPrice(data){
+        context3.innerHTML = "当前价格："+
+        data['0000001'].name +': ' + 
+        data['0000001'].price + '；' +
+        data['1399001'].name + ': ' +
+        data['1399001'].price;
+        localStorage.setItem(data['0000001'].name, data['0000001'].price);
+    }
+
+    btn2.addEventListener('click', function() {
+        ae.trans.JSONP({
+            url: "http://localhosts/mook.js", 
+            callback: "showPrice"
+        });
+    });
+
+    var context4 = ae.func.getId("context4");
+    var btn3 = ae.func.getId("btn3");
+    
+    function myWorld(data) {
+        context4.innerHTML = data.name + " is " + data.class;
+        sessionStorage.setItem(data.name, data.class);
+    }
+
+    btn3.addEventListener('click', function() {
+        ae.trans.JSONP({
+            url: "http://localhosts/mook4.js", 
+            callback: "myWorld"
+        });
+    });
+
+
+    var context5 = ae.func.getId("context5");
+    var btn4 = ae.func.getId("btn4");
+
+    btn4.addEventListener('click', function() {
+        ae.trans.CORS({
+            type: "GET",
+            url: "http://localhosts/mook1.txt",
+            async: true
+        }, callback);
+
+        function callback(xmls) {
+            context5.innerHTML = xmls.responseText;
+        }
+    })
+</script>

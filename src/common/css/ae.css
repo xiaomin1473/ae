@@ -1,0 +1,55 @@
+.carousel {
+    position: relative;
+    width: 100%;
+    height: inherit;
+    background-color: aqua;
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    /* 清除折行空隙 */
+    font-size: 0;
+    zoom: 1;
+}
+
+.carousel-wrapper {
+    height: inherit;
+}
+
+.carousel-pre {
+    position: absolute;
+    top: 41%;
+    left: 20px;
+    z-index: 1;
+    width: 32px;
+    height: 32px;
+    font-size: 13px;
+    color: #fff;
+    text-align: center;
+    line-height: 29px;
+    background-color: rgba(31,45,61,.11);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.carousel-next {
+    position: absolute;
+    top: 41%;
+    right: 20px;
+    z-index: 1;
+    width: 32px;
+    height: 32px;
+    font-size: 13px;
+    color: #fff;
+    text-align: center;
+    line-height: 29px;
+    background-color: rgba(31,45,61,.11);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.carousel-items {
+    display: inline-block;
+    height: inherit;
+    font-size: 13px;
+}

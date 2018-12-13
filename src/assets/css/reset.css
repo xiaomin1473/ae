@@ -67,7 +67,7 @@ table {
 }
 
 * {
-  font-size: 14.7px;
+  font-size: 13px;
   color: #000;
 }
 
@@ -83,7 +83,7 @@ h5 { font-size: 13px; font-weight: bold;}
 
 h6 { font-size: 12px; font-weight: bold;}
 
-p { font-size: 10px; }
+p { font-size: 13px; }
 
 input { outline: none; }
 
