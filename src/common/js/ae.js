@@ -122,7 +122,6 @@
 
             e.appendChild(btn.pre);
             e.appendChild(btn.next);
-
         },
         swing: function(e, btn) {
             btn.pre.onclick = function() {
@@ -179,8 +178,6 @@
                 this.createBtn(this.carousel, this.btn);
                 this.swing(this.wrapper, this.btn);
             }
-
-            
 
         }
     }
